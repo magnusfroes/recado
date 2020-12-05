@@ -8,13 +8,15 @@
       <textarea cols="30" rows="10" v-model="recado"></textarea>
       <br><br>
       <label for="data">Data:</label>
-      <input type="text" v-model="data">
+      <input type="date" v-model="data">
     </div>
     <div class="carta">
       <h2>{{ nome }}</h2>
       <p>{{ recado }}</p>
-      <br>
-      <p>{{ data }}</p>
+      <br>     
+    </div>
+    <div class="data">
+      <p>{{ data.split('-').reverse().join('/') }}</p>
     </div>
   </div>
   
@@ -52,7 +54,7 @@ export default {
   display: flex;
   margin: 20px;
   padding: 20px;
-  width: 300px;
+  min-width: 300px;
   height: 420px;
   flex-direction: column;
   word-wrap: break-word;
@@ -61,5 +63,36 @@ export default {
   background-repeat: no-repeat;
   font-family: "Norse", Helvetica, Arial;
   font-size: 18px;
+}
+
+textarea {
+   resize: none;
+}
+
+.data {
+  display: flex;
+  position: absolute;
+  bottom: 100px;
+  right: 20%;
+}
+
+@media (max-width: 700px) {
+
+  .tabela {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .entrada {
+    margin-bottom: 30px;
+  }
+
+  .data {
+    display: flex;
+    position: absolute;
+    bottom: -270px;
+    right: 30%;
+}
+
 }
 </style>
