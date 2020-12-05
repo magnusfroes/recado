@@ -5,14 +5,14 @@
       <input type="text" v-model="nome">
       <br><br>
       <label for="recado">Recado:</label>
-      <textarea cols="30" rows="10" v-model="recado"></textarea>
+      <textarea maxlength="550" cols="30" rows="10" v-model="recado"></textarea>
       <br><br>
       <label for="data">Data:</label>
       <input type="date" v-model="data">
     </div>
     <div class="carta">
-      <h2>{{ nome }}</h2>
-      <p>{{ recado }}</p>
+      <h2>{{ nome }}</h2> 
+        <p>{{ recado }}</p>
       <br>     
     </div>
     <div class="data">
@@ -54,13 +54,19 @@ export default {
   display: flex;
   margin: 20px;
   padding: 20px;
-  min-width: 300px;
+  max-width: 300px;
+  width: 100%;
   height: 420px;
   flex-direction: column;
   word-wrap: break-word;
   background-image: url('../assets/papel.jpg');
   background-size: 100%;
   background-repeat: no-repeat;
+  font-family: "Norse", Helvetica, Arial;
+  font-size: 18px;
+}
+
+.data {
   font-family: "Norse", Helvetica, Arial;
   font-size: 18px;
 }

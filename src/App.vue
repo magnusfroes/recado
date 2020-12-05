@@ -1,28 +1,26 @@
 <template>
   <div id="app">
+    <Topo/>
     <Recado/>
   </div>
 </template>
 
 <script>
 import Recado from './components/Recado'
+import Topo from './components/Topo'
 
 export default {
   name: 'App',
   components: {
-    Recado
+    Recado,
+    Topo
   }
 }
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 
 @font-face {
