@@ -1,21 +1,22 @@
 <template>
   <div id="app">
-    <Topo/>
-    <Recado/>
+    <Topo />
+    <Recado />
+    <hr />
   </div>
 </template>
 
 <script>
-import Recado from './components/Recado'
-import Topo from './components/Topo'
+import Recado from "./components/Recado";
+import Topo from "./components/Topo";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     Recado,
-    Topo
-  }
-}
+    Topo,
+  },
+};
 </script>
 
 <style>
@@ -25,8 +26,6 @@ export default {
 
 @font-face {
   font-family: "Norse";
-  src: local("Norse"),
-   url(./fonts/Norse.otf) format("truetype");
+  src: local("Norse"), url(./fonts/Norse.otf) format("truetype");
 }
-
 </style>
