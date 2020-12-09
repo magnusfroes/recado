@@ -45,6 +45,8 @@ export default {
   align-items: flex-start;
   justify-content: space-around;
   width: 100%;
+  padding: 2%;
+  border-bottom: 1px solid #c6c6c6;
 }
 .carta {
   display: flex;

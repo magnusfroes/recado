@@ -2,26 +2,37 @@
   <div id="app">
     <Topo />
     <Recado />
-    <hr />
+    <Exercicio />
+    <Contatos />
   </div>
 </template>
 
 <script>
-import Recado from "./components/Recado";
 import Topo from "./components/Topo";
+import Recado from "./components/Recado";
+import Exercicio from "./components/Exercicio"
+import Contatos from "./components/Contatos"
+
 
 export default {
   name: "App",
   components: {
     Recado,
     Topo,
+    Exercicio,
+    Contatos
   },
 };
 </script>
 
 <style>
 #app {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   text-align: center;
+  justify-content: center;
+  align-items: center;
 }
 
 @font-face {
