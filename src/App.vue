@@ -4,6 +4,7 @@
     <Recado />
     <Exercicio />
     <Contatos />
+    <Painel />
   </div>
 </template>
 
@@ -12,6 +13,7 @@ import Topo from "./components/Topo";
 import Recado from "./components/Recado";
 import Exercicio from "./components/Exercicio"
 import Contatos from "./components/Contatos"
+import Painel from "./components/Painel"
 
 
 export default {
@@ -20,7 +22,8 @@ export default {
     Recado,
     Topo,
     Exercicio,
-    Contatos
+    Contatos,
+    Painel
   },
 };
 </script>
