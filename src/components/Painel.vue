@@ -1,11 +1,11 @@
 <template>
     <div id="painel">
         <div id="painel2">
-            <div id="top1"></div>  
+            <div id="top1"><h1>Lista</h1></div>  
             <div id="bodyy">
                 <div id="lateral">
                     <div id="inputt">
-                        <input type="text" v-model="nomeInput"> <span>{{ aviso }}</span>
+                        <input type="text" v-model="nomeInput">
                     </div>
                     <div v-if="nomePronto">
                         <button @click="add">Adicionar</button>
@@ -46,7 +46,7 @@ export default {
             }
 
             if(this.nomeInput != '') {
-                this.aviso = 'Digitando';
+                this.aviso = 'Digitando...';
                 this.nomePronto = false;
                 this.timer = setTimeout(this.ficarPronto, 1000);
             }
@@ -83,6 +83,8 @@ export default {
         display: flex;   
         height: 100%;
         width: 100%;
+        justify-content: center;
+        border-bottom: 1px solid #c6c6c6;
     }
 
     #painel2 {
@@ -91,12 +93,13 @@ export default {
         flex-direction: column;
         border: 1px solid #c6c6c6;
         height: 500px;
-        width: 100%;
+        width: 400px;
     }
 
     #top1 {
         display: flex;
         background-color: #c2c2c2;
+        justify-content: center;
         height: 40%;
         width: 100%;
     }
