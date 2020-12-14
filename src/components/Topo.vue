@@ -1,6 +1,10 @@
 <template>
     <div class="div">
-        <h1>Exercícios com Vue.js</h1>
+        <div class="top2">
+            <div class="img"></div>
+            <p><strong>Magnus Froes</strong></p>
+        </div>
+        <h1>Imobiliaria</h1>
         
     </div>
 </template>
@@ -16,13 +20,37 @@ export default {
 .div {
     display: flex;
     width: 100%;
-    justify-content: center;
-    border-bottom: 1px solid #c6c6c6;
+    color: white;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #202225;
+    border-bottom: 1px solid #2F3136;
+}
+
+.top2 {
+    display: flex;
+    width: 45%;
+    padding-left: 10px;
+    height: 100%;
+    align-items: center;
+    font-size: 14px;
 }
 
 h1 {
-    font-family: "Norse", Helvetica, Arial;
-    
+    font-family: "Norse", Helvetica, Arial;   
+}
+
+.img {
+    display: flex;
+    width: 50px;
+    height: 50px;
+    margin: 10px;
+    background-image: url(../assets/perfil.jpg);
+    background-size: 140%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #2F3136;
+    border-radius: 50%;
 }
 
 </style>

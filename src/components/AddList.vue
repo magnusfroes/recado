@@ -1,36 +1,34 @@
 <template>
     <div class="addlist">
         <div class="lista">
-            <div class="top"><h1>Lista</h1></div>
+            <div class="top"><h2>Cadastro de imóveis</h2></div>
             <div class="center">
                 <div class="nome">Nomes:</div>
-                <input type="text" v-model="nomeInput" v-bind:class="{ borda:isBorda}">
+                <input type="text" v-model="nomeInput" v-bind:class="{ borda:isBorda}" @keyup.enter="add">
                 <div class="neutro" v-if="aparecertexto" v-bind:class="{ error:isError }">{{ TextoPequeno }}</div>
                 <div class="nome">Email:</div>
-                <input type="email" v-model="emailInput" v-bind:class="{ borda2:isBorda2}">
+                <input type="email" v-model="emailInput" v-bind:class="{ borda2:isBorda2}" @keyup.enter="add">
                 <div class="neutro" v-if="aparecertexto2" v-bind:class="{ error2:isError2 }">{{ TextoPequeno2 }}</div>
                 <div class="botao">
                     <button v-if="aparecer" @click="add">Adicionar</button>
                 </div>
-            </div>
-            <div class="fooooter">
-                <div class="row">
-                    <div>
-                        <h3>Nome</h3>
-                        <ul>
-                            <li v-for="items in lista" :key="items">{{ items }}</li>
-                        </ul>
-
-                    </div>
-                    <div>
-                        <h3>Email</h3>
-                        <ul>
-                            <li v-for="email in emails" :key="email">{{ email }}</li>
-                        </ul>
-
+                <div class="resultado">{{ TotalTexto }}</div>
+            </div>         
+        </div>
+        <div class="central"> 
+            <div class="ticket"  v-for="item in lista" :key="item">
+                <div class="coluna">
+                    <div class="imagem-ticket"></div>
+                    <div class="linha">
+                        <div>
+                            <p>Nome:</p>
+                            <p>Email:</p>
+                        </div>
+                        <div class="resul">
+                                <p>{{ item }}</p>                             
+                        </div>
                     </div>
                 </div>
-                <div class="resultado">{{ TotalTexto }}</div>
             </div>
         </div>
     </div>
@@ -43,7 +41,6 @@ export default {
         return {
             nomeInput: '',
             emailInput: '',
-            emails: [],
             lista: [],
             aparecer: true,
             aparecertexto: false,
@@ -59,10 +56,7 @@ export default {
     methods: {
         add: function() {
             if(this.nomeInput.length >= 10 && this.emailInput.length >=10) {
-                this.lista.push(this.nomeInput);
-                this.emails.push(this.emailInput);
-                
-                
+                this.lista.push(this.nomeInput, this.emailInput);   
 
                 this.nomeInput = '';
                 this.emailInput = '';
@@ -91,7 +85,7 @@ export default {
     },
     computed: {
         TotalTexto: function() {
-            return 'Total da lista: ' + this.lista.length;
+            return 'Total de cadastros: ' + this.lista.length;
 
         },
     },
@@ -121,18 +115,21 @@ export default {
 
 .addlist {
     display: flex;
-    justify-content: center;
-    
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+    background-color: #2F3136;
 }
 
 .lista {
     display: flex;
     flex-direction: column;
-    min-width: 500px;
-    margin: 30px;
+    max-width: 280px;
+    padding-top: 15px;
     width: 100%;
-    height: 500px;
-    background-color: brown;
+    height: 60vw;
+    background-color: #202225;
 }
 
 .top {
@@ -147,9 +144,9 @@ export default {
 .center {
     display: flex;
     flex-direction: column;
-    padding: 10%;
-    height: 30%;
-    background-color: blue;
+    padding: 6%;
+    height: 80%;
+    background-color: #202225;
 }
 
 .nome {
@@ -164,28 +161,50 @@ export default {
     justify-content: flex-start;
 }
 
-.fooooter {
+.central {
+    display: grid;
+    width: 100%;
+    height: 60vw;
+    padding: 20px;
+    padding-bottom: 0;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    grid-gap: 20px;
+}
+
+.ticket {
     display: flex;
     color: white;
     flex-direction: column;
-    width: 100%;
-    height: 50%;
-    background-color: rgb(101, 20, 155);
+    height: 100%;
+    border-radius: 4px;
+    background-color: #4D5259;
 }
 
-.fooooter ul {
+.ticket ul {
     display: flex;
     flex-direction: column;
 }
 
-.fooooter ul li {
+.ticket ul li {
     display: flex;
     list-style: none;
 }
 
+.imagem-ticket {
+    display: flex;
+    width: 100%;
+    height: 60%;
+    background-color: #BAC7D9;
+}
+
 .resultado {
     display: flex;
-    margin: 30px;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 100%;
+    height: 50px;
+    color: white;
 }
 
 .botao {
@@ -212,17 +231,40 @@ export default {
 }
 
 .borda {
-    border: 1px solid red;
+    border: 2px solid red;
 }
 
 .borda2 {
-    border: 1px solid red;
+    border: 2px solid red;
 }
 
-.row {
+.coluna {
     display: flex;
-    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
     justify-content: space-around;
 }
 
+.linha {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 5%;
+}
+
+.resul {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    padding: 5%;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.item {
+    display: flex;
+
+}
 </style>
