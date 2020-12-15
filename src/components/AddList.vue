@@ -4,11 +4,26 @@
             <div class="top"><h2>Cadastro de imóveis</h2></div>
             <div class="center">
                 <div class="nome">Nomes:</div>
-                <input type="text" v-model="nomeInput" v-bind:class="{ borda:isBorda}" @keyup.enter="add">
-                <div class="neutro" v-if="aparecertexto" v-bind:class="{ error:isError }">{{ TextoPequeno }}</div>
+                <input type="text" v-model="nomeInput" v-bind:class="{ borda:isBorda}">
+                <div class="neutro" v-if="aparecertexto" v-bind:class="{ error:isError }">{{ TextoPequeno }}</div><br>
                 <div class="nome">Email:</div>
-                <input type="email" v-model="emailInput" v-bind:class="{ borda2:isBorda2}" @keyup.enter="add">
-                <div class="neutro" v-if="aparecertexto2" v-bind:class="{ error2:isError2 }">{{ TextoPequeno2 }}</div>
+                <input type="email" v-model="emailInput" v-bind:class="{ borda2:isBorda2}">
+                <div class="neutro" v-if="aparecertexto2" v-bind:class="{ error2:isError2 }">{{ TextoPequeno2 }}</div><br>
+                <div class="nome">Tipo de imóvel:</div>
+                <select v-model="Tipo">
+                    <option disabled value="">Escolha um tipo de imóvel</option>
+                    <option>Casa</option>
+                    <option>Apartamento</option>
+                    <option>Comercial</option>
+                </select><br>
+                <div class="nome">Quartos:</div>
+                <select v-model="Quartos">
+                        <option disabled value="">Escolha numero de quartos</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                    </select>
                 <div class="botao">
                     <button v-if="aparecer" @click="add">Adicionar</button>
                 </div>
@@ -16,22 +31,18 @@
             </div>         
         </div>
         <div class="central"> 
-            <div class="ticket"  v-for="item in lista" :key="item">
+            <div class="ticket"  v-for="item in todos" :key="item">
                 <div class="coluna">
                     <div class="imagem-ticket"></div>
                     <div class="linha">
-                        <div>
-                            <p>Nome:</p>
-                            <p>Email:</p>
-                        </div>
-                        <div class="resul">
-                                <p>{{ item }}</p>                             
+                        <div class="resul" v-for="(value, name) in lista" :key="value">
+                            <p>{{name}} : {{ value }}</p>                                                                   
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div>  
     
 </template>
 
@@ -41,7 +52,15 @@ export default {
         return {
             nomeInput: '',
             emailInput: '',
-            lista: [],
+            descricaof: '',
+            lista: {
+                Nome: '',
+                Email:'',
+                Tipo: '',
+                Quartos: ''
+            },
+            
+            todos: [],
             aparecer: true,
             aparecertexto: false,
             aparecertexto2: false,
@@ -55,8 +74,13 @@ export default {
     },
     methods: {
         add: function() {
-            if(this.nomeInput.length >= 10 && this.emailInput.length >=10) {
-                this.lista.push(this.nomeInput, this.emailInput);   
+            if(this.nomeInput.length >= 10 && this.emailInput.length >=10) {           
+                this.lista.Nome = this.nomeInput
+                this.lista.Email = this.emailInput
+                this.lista.Tipo = this.Tipo
+                this.lista.Quartos = this.Quartos
+                    
+                this.todos.push(this.lista);   
 
                 this.nomeInput = '';
                 this.emailInput = '';
@@ -85,7 +109,7 @@ export default {
     },
     computed: {
         TotalTexto: function() {
-            return 'Total de cadastros: ' + this.lista.length;
+            return 'Total de cadastros: ' + this.todos.length;
 
         },
     },
@@ -194,7 +218,7 @@ export default {
 .imagem-ticket {
     display: flex;
     width: 100%;
-    height: 60%;
+    height: 45%;
     background-color: #BAC7D9;
 }
 
@@ -248,16 +272,16 @@ export default {
 
 .linha {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     padding: 5%;
+    overflow: hidden;
 }
 
 .resul {
     display: flex;
     width: 100%;
-    height: 100%;
-    padding: 5%;
+    height: 40px;
     align-items: flex-start;
     justify-content: center;
     flex-direction: column;
@@ -266,5 +290,9 @@ export default {
 .item {
     display: flex;
 
+}
+
+textarea {
+   resize: none;
 }
 </style>
