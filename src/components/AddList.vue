@@ -119,8 +119,6 @@ export default {
         fecharConfirm:function() {
             this.modal = false
 
-            this.lista = new Object()
-
             this.lista.Nome = this.nomeInput
             this.lista.Email = this.emailInput
             this.lista.Tipo = this.Tipo
