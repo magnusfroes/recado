@@ -25,13 +25,13 @@
                         <option>4</option>
                     </select>
                 <div class="botao">
-                    <button v-if="aparecer" @click="add">Adicionar</button>
+                    <button @click="add">Adicionar</button>
                 </div>
                 <div class="resultado">{{ TotalTexto }}</div>
             </div>         
         </div>
         <div class="central"> 
-            <div class="ticket"  v-for="item in todos" :key="item">
+            <div class="ticket" v-for="item in todos" :key="item">
                 <div class="coluna">
                     <div class="imagem-ticket"></div>
                     <div class="linha">
@@ -42,8 +42,19 @@
                 </div>
             </div>
         </div>
-    </div>  
-    
+        <section>
+            <div class="modal" v-if="modal">
+                <h3>Cadastrado com sucesso!</h3>
+                <div class="confirm"></div>
+                <button class="fechar" @click="fecharConfirm">Ok</button>
+            </div>
+            <div class="modal" v-if="modalFail">
+                <h3>Erro ao cadastrar!</h3>
+                <div class="fail"></div>
+                <button class="fechar" @click="fecharFail">Ok</button>
+            </div>
+        </section>
+    </div>
 </template>
 
 <script>
@@ -59,7 +70,6 @@ export default {
                 Tipo: '',
                 Quartos: ''
             },
-            
             todos: [],
             aparecer: true,
             aparecertexto: false,
@@ -68,22 +78,19 @@ export default {
             isBorda: false,
             isError2: false,
             isBorda2: false,
+            modal: false,
+            modalFail: false,
             TextoPequeno: 'Mínimo 10 caracteres',
             TextoPequeno2: 'Mínimo 10 caracteres'
         }
     },
     methods: {
         add: function() {
-            if(this.nomeInput.length >= 10 && this.emailInput.length >=10) {           
-                this.lista.Nome = this.nomeInput
-                this.lista.Email = this.emailInput
-                this.lista.Tipo = this.Tipo
-                this.lista.Quartos = this.Quartos
-                    
-                this.todos.push(this.lista);   
+            if(this.nomeInput.length >= 10 && this.emailInput.length >=10) {    
+                
+                this.modal = true
 
-                this.nomeInput = '';
-                this.emailInput = '';
+                
                 /* this.aparecer = false */
                 this.isError = false
                 this.isBorda = false
@@ -94,6 +101,9 @@ export default {
                 
             
             } else if(this.nomeInput.length < 10 && this.emailInput.length < 10) {
+
+                this.modalFail = true
+
                 this.aparecertexto = true
                
                 this.isError = true
@@ -105,6 +115,22 @@ export default {
                 this.isBorda2 = true
 
             }            
+        },
+        fecharConfirm:function() {
+            this.modal = false
+
+            this.lista.Nome = this.nomeInput
+            this.lista.Email = this.emailInput
+            this.lista.Tipo = this.Tipo
+            this.lista.Quartos = this.Quartos
+            
+            this.todos.push(this.lista);
+
+            this.nomeInput = '';
+            this.emailInput = '';
+        },
+        fecharFail:function() {
+            this.modalFail = false
         }
     },
     computed: {
@@ -294,5 +320,60 @@ export default {
 
 textarea {
    resize: none;
+}
+
+.modal {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    height: 250px;
+    background-color: #4D5259;
+    border: 1px solid #ffff;
+    border-radius: 4px;
+    position: absolute;
+    padding: 1%;
+    left: 50%;
+    top: 30%;
+    align-items: center;
+    transform: translateX(-50%);
+}
+
+.modal h3 {
+    display: flex;
+    color: white;
+}
+
+.confirm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-image: url(../assets/confirm.png);
+    background-repeat: no-repeat;
+    background-size: 50%;
+    background-position: center;
+}
+
+.fail {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-image: url(../assets/fail.png);
+    background-repeat: no-repeat;
+    background-size: 50%;
+    background-position: center;
+}
+
+.fechar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50px;
 }
 </style>
