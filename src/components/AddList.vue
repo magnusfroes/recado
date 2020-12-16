@@ -119,6 +119,8 @@ export default {
         fecharConfirm:function() {
             this.modal = false
 
+            this.lista = new Object()
+
             this.lista.Nome = this.nomeInput
             this.lista.Email = this.emailInput
             this.lista.Tipo = this.Tipo
@@ -172,14 +174,28 @@ export default {
     background-color: #2F3136;
 }
 
+
+
 .lista {
     display: flex;
     flex-direction: column;
-    max-width: 280px;
+    width: 350px;
     padding-top: 15px;
-    width: 100%;
-    height: 60vw;
+    height: 100vw;
     background-color: #202225;
+}
+
+@media (max-width: 630px) {
+    .addlist {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .lista {
+        display: flex;
+        width: 100%;
+        height: 100%;
+    }
 }
 
 .top {
@@ -195,7 +211,7 @@ export default {
     display: flex;
     flex-direction: column;
     padding: 6%;
-    height: 80%;
+    height: 100%;
     background-color: #202225;
 }
 
@@ -214,19 +230,22 @@ export default {
 .central {
     display: grid;
     width: 100%;
-    height: 60vw;
+    height: 100%;
     padding: 20px;
     padding-bottom: 0;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-rows: repeat(auto-fit, 1fr);
     grid-gap: 20px;
+    justify-items: center;
 }
 
 .ticket {
     display: flex;
     color: white;
     flex-direction: column;
-    height: 100%;
+    max-width: 300px;
+    width: 100%;
+    height: 400px;
     border-radius: 4px;
     background-color: #4D5259;
 }
