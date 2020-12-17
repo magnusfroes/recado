@@ -31,13 +31,16 @@
             </div>         
         </div>
         <div class="central"> 
-            <div class="ticket" v-for="item in todos" :key="item">
+            <div class="ticket" v-for="(lista, index) in todos" :key="lista">
                 <div class="coluna">
                     <div class="imagem-ticket"></div>
                     <div class="linha">
                         <div class="resul" v-for="(value, name) in lista" :key="value">
                             <p>{{name}} : {{ value }}</p>                                                                   
                         </div>
+                    </div>
+                    <div class="botaoExcluir">
+                        <button @click="botaoExcluir(index)">Excluir</button>
                     </div>
                 </div>
             </div>
@@ -63,13 +66,7 @@ export default {
         return {
             nomeInput: '',
             emailInput: '',
-            descricaof: '',
-            lista: {
-                Nome: '',
-                Email:'',
-                Tipo: '',
-                Quartos: ''
-            },
+            descricaof: '',    
             todos: [],
             aparecer: true,
             aparecertexto: false,
@@ -90,8 +87,6 @@ export default {
                 
                 this.modal = true
 
-                
-                /* this.aparecer = false */
                 this.isError = false
                 this.isBorda = false
                 this.isError2 = false
@@ -103,34 +98,36 @@ export default {
             } else if(this.nomeInput.length < 10 && this.emailInput.length < 10) {
 
                 this.modalFail = true
-
-                this.aparecertexto = true
-               
+                
                 this.isError = true
-                this.isBorda = true
-
-                this.aparecertexto2 = true
-               
+                this.isBorda = true               
                 this.isError2 = true
                 this.isBorda2 = true
+                this.aparecertexto = true
+                this.aparecertexto2 = true
 
             }            
         },
         fecharConfirm:function() {
             this.modal = false
 
-            this.lista.Nome = this.nomeInput
-            this.lista.Email = this.emailInput
-            this.lista.Tipo = this.Tipo
-            this.lista.Quartos = this.Quartos
-            
-            this.todos.push(this.lista);
+            const lista = {
+                Nome: this.nomeInput,
+                Email: this.emailInput,
+                Tipo: this.Tipo,
+                Quartos: this.Quartos
+            }
+  
+            this.todos.unshift(lista);
 
             this.nomeInput = '';
             this.emailInput = '';
         },
         fecharFail:function() {
             this.modalFail = false
+        },
+        botaoExcluir:function(index) {
+           this.todos.splice(index, 1);
         }
     },
     computed: {
@@ -141,10 +138,6 @@ export default {
     },
     watch: {
         nomeInput: function() {
-           /*  if(this.nomeInput.length > 1) {
-                this.aparecer = true
-
-            }  */
             if (this.nomeInput.length >= 10) {
                 this.isError = false
                 this.isBorda = false
@@ -392,5 +385,12 @@ textarea {
     align-items: center;
     width: 100%;
     height: 50px;
+}
+
+.botaoExcluir {
+    display: flex;
+    height: 40px;
+    padding: 2%;
+    justify-content: flex-end;
 }
 </style>
