@@ -4,8 +4,7 @@
             <div class="img"></div>
             <p><strong>Magnus Froes</strong></p>
         </div>
-        <h1>Imobiliaria</h1>
-        
+        <h1>Imobiliaria</h1>       
     </div>
 </template>
 

@@ -6,7 +6,7 @@
         <div class="nome">Nomes:</div>
         <input
           type="text"
-          v-model="nomeInput"
+          v-model.trim="nomeInput"
           v-bind:class="{ borda: isBorda }"
         />
         <div
@@ -20,7 +20,7 @@
         <div class="nome">Email:</div>
         <input
           type="email"
-          v-model="emailInput"
+          v-model.trim="emailInput"
           v-bind:class="{ borda2: isBorda2 }"
         />
         <div
@@ -36,8 +36,8 @@
           <option disabled value="">Escolha um tipo de imóvel</option>
           <option>Casa</option>
           <option>Apartamento</option>
-          <option>Comercial</option></select
-        ><br />
+          <option>Comercial</option></select>
+          <br />
         <div class="nome">Quartos:</div>
         <select v-model="Quartos">
           <option disabled value="">Escolha numero de quartos</option>
